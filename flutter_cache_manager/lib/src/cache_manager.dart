@@ -282,4 +282,7 @@ class CacheManager implements BaseCacheManager {
   Future<void> dispose() async {
     await _config.repo.close();
   }
+
+  // Cache size in bytes
+  Future<int> cacheSize() => _store.cacheSize;
 }

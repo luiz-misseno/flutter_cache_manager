@@ -188,6 +188,19 @@ class CacheStore {
     }
   }
 
+  Future<int> get cacheSize async {
+    final provider = await _cacheInfoRepository;
+    var bytes = 0;
+    final allObjects = await provider.getAllObjects();
+    for (final cacheObject in allObjects) {
+      if (cacheObject.length != null) {
+        bytes += cacheObject.length!;
+      }
+    }
+
+    return bytes;
+  }
+
   Future<void> dispose() async {
     final provider = await _cacheInfoRepository;
     await provider.close();
